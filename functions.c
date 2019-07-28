@@ -25,8 +25,9 @@ void loginn(){
 	char debug[100];
 	
 
-	FILE *Accounts = fopen("accounts","r");
 	while(flag == 0){
+
+	FILE *Accounts = fopen("accounts","r");
 	cbc();
 	strcpy(login,"");
 	strcpy(password,"");
@@ -136,14 +137,15 @@ int randomNumber() {
 
 void menu(char *login, char *password)
 {
+	int flag = 0;
+while(flag==0){
 	cbc();
-
 	printf("\t       ██     OPÇÕES     ██\n");
 	printf("\t       █ 1 - Extrato      █\n");
 	printf("\t       █ 2 - Depósito     █\n");
 	printf("\t       █ 3 - Pagamento    █\n");
 	printf("\t       █ 4 - Saque        █\n");
-	printf("\t       █ 0 - Sair        █\n");
+	printf("\t       █ 0 - Sair         █\n");
 	printf("\t       ██                ██\n\n");
 
 	int opc;
@@ -178,20 +180,15 @@ void menu(char *login, char *password)
 		break;
 
 		case 0:
-		system("clear");
-		cbc();
-		printf("\t\t  ██ Programa Encerrado ██\n\n");
+		flag=1;
+		sair();
 		break;
 	}
+}
 }
 
 void extrato(char *login, char *password)
 {	
-
-}
-
-void deposito(char *login, char *password)
-{
 	char lgn[100], shn[100], sald[100], saldo[100], leitor[1000];
 	double dep = 50, x = 100, aux = 1;
 	FILE *Accounts = fopen("accounts","r");
@@ -207,17 +204,52 @@ void deposito(char *login, char *password)
 			fscanf(Accounts,"%s\n", lgn);
 			fscanf(Accounts,"%s\n", shn);
 			fscanf(Accounts,"%s\n", sald);
-			printf("%s\n", lgn);
-			printf("%s\n", shn);
-			printf("%s\n", sald);
 
+			if(strcmp(login, lgn) == 0 && strcmp(password, shn) == 0){
+				cbc();
+				printf("\t       ██     Extrato     ██\n\n");
+				printf("\t     ██ %s\n", login);
+				printf("\t     ██ SALDO: %s\n", sald);
+				break;
+				}
+	}
+	fclose(Accounts);
+	fclose(temp);
+	rtr();
+}
+
+void deposito(char *login, char *password)
+{
+	char lgn[100], shn[100], sald[100], saldo[100], leitor[1000];
+	double dep = 50, x = 100, aux = 1;
+	cbc();
+	printf("\t       ██     Deposito     ██\n\n");
+	printf("\t     ██ Valor: ");
+	scanf("%lf", &dep);
+
+	FILE *Accounts = fopen("accounts","r");
+	FILE *temp = fopen("temp","w");
+
+	while(aux>0)
+	{		
+			if(fgets(leitor, 1000, Accounts) == NULL)
+			{	
+				break;
+			}
+
+			fscanf(Accounts,"%s\n", lgn);
+			fscanf(Accounts,"%s\n", shn);
+			fscanf(Accounts,"%s\n", sald);
 			if(strcmp(login, lgn) == 0 && strcmp(password, shn) == 0){
 				fprintf(temp,"===========\n");
 				fprintf(temp, "%s\n",lgn);
 				fprintf(temp, "%s\n",shn);
 				x = atof(sald);
 				x = x+dep;
-				fprintf(temp, "%lf\n", x);
+				fprintf(temp, "%.2lf\n", x);
+				printf("\n\t       ██     Extrato      ██\n\n");
+				printf("\t     ██ %s\n", login);
+				printf("\t     ██ SALDO: %.2lf\n", x);
 				}else{
 				fprintf(temp,"===========\n");
 				fprintf(temp, "%s\n",lgn);
@@ -247,15 +279,25 @@ void deposito(char *login, char *password)
 			}
 	fclose(Accounts);
 	fclose(temp);
+	rtr();
 }
 
 void pagamento(char *login, char *password)
-{
-	char lgn[100], shn[100], sald[100], saldo[100], leitor[1000];
+{	
+	char barra[300], lgn[100], shn[100], sald[100], saldo[100], leitor[1000];
 	double pag = 50, x = 100, aux = 1;
+	cbc();
+	printf("\t       ██     Pagamento     ██\n\n");
+	printf("\t     ██ Codigo de barra: ");
+	scanf("%s", barra);
+	printf("\t     ██ Valor: ");
+	scanf("%lf", &pag);
+
+
+	
 	FILE *Accounts = fopen("accounts","r");
 	FILE *temp = fopen("temp","w");
-	scanf("%lf", &pag);
+	
 	while(aux>0)
 	{		
 			if(fgets(leitor, 1000, Accounts) == NULL)
@@ -266,17 +308,22 @@ void pagamento(char *login, char *password)
 			fscanf(Accounts,"%s\n", lgn);
 			fscanf(Accounts,"%s\n", shn);
 			fscanf(Accounts,"%s\n", sald);
-			printf("%s\n", lgn);
-			printf("%s\n", shn);
-			printf("%s\n", sald);
 
 			if(strcmp(login, lgn) == 0 && strcmp(password, shn) == 0){
 				fprintf(temp,"===========\n");
 				fprintf(temp, "%s\n",lgn);
 				fprintf(temp, "%s\n",shn);
 				x = atof(sald);
+				while(x<pag){
+					printf("\n\t       ██ Saldo Insuficiente.\n");
+					printf("\t       ██ Saldo Atual: %.2lf.\n", x);
+					printf("\t       ██ Digite novamente\n\n");
+					printf("\t     ██ Valor: ");
+					scanf("%lf", &pag);
+				}
 				x = x-pag;
 				fprintf(temp, "%.2lf\n", x);
+				printf("\n\n\t     ██ SALDO ATUAL: %.2lf\n", x);
 				}else{
 				fprintf(temp,"===========\n");
 				fprintf(temp, "%s\n",lgn);
@@ -306,9 +353,95 @@ void pagamento(char *login, char *password)
 			}	
 	fclose(Accounts);
 	fclose(temp);
+	rtr();
 }
 
 void saque(char *login, char *password)
 {
+	char lgn[100], shn[100], sald[100], saldo[100], leitor[1000];
+	double pag = 50, x = 100, aux = 1;
+	cbc();
+	printf("\t       ██       Saque       ██\n\n");
+	printf("\t     ██ Valor: ");
+	scanf("%lf", &pag);
+
+
 	
+	FILE *Accounts = fopen("accounts","r");
+	FILE *temp = fopen("temp","w");
+	
+	while(aux>0)
+	{		
+			if(fgets(leitor, 1000, Accounts) == NULL)
+			{	
+				break;
+			}
+
+			fscanf(Accounts,"%s\n", lgn);
+			fscanf(Accounts,"%s\n", shn);
+			fscanf(Accounts,"%s\n", sald);
+
+			if(strcmp(login, lgn) == 0 && strcmp(password, shn) == 0){
+				fprintf(temp,"===========\n");
+				fprintf(temp, "%s\n",lgn);
+				fprintf(temp, "%s\n",shn);
+				x = atof(sald);
+				while(x<pag){
+					printf("\n\t       ██ Saldo Insuficiente.\n");
+					printf("\t       ██ Saldo Atual: %.2lf.\n", x);
+					printf("\t       ██ Digite novamente\n\n");
+					printf("\t     ██ Valor: ");
+					scanf("%lf", &pag);
+				}
+				x = x-pag;
+				fprintf(temp, "%.2lf\n", x);
+				printf("\n\n\t     ██ SALDO ATUAL: %.2lf\n", x);
+				}else{
+				fprintf(temp,"===========\n");
+				fprintf(temp, "%s\n",lgn);
+				fprintf(temp, "%s\n",shn);
+				fprintf(temp, "%s\n",sald);
+			}
+	}
+	fclose(Accounts);
+	fclose(temp);
+
+	Accounts = fopen("accounts","w");
+	temp = fopen("temp","r");
+ 	while(aux>0)
+	{		
+			if(fgets(leitor, 1000, temp) == NULL)
+			{	
+				break;
+			}
+
+			fscanf(temp,"%s\n", lgn);
+			fscanf(temp,"%s\n", shn);
+			fscanf(temp,"%s\n", sald);			
+			fprintf(Accounts,"===========\n");
+			fprintf(Accounts, "%s\n",lgn);
+			fprintf(Accounts, "%s\n",shn);
+			fprintf(Accounts, "%s\n",sald);
+			}	
+	fclose(Accounts);
+	fclose(temp);
+	rtr();
+}
+void rtr(){
+	int opc;
+	printf("\n\t       ██   1 - Menu      ██\n");
+	printf("\t       ██   0 - Encerrar  ██\n");
+	printf("\t       ██  Opção: ");
+	scanf("%d", &opc);
+	if(opc == 0){
+		sair();
+	}
+
+}
+void sair()
+{
+		system("clear");
+		cbc();
+		printf("\t         ██ Programa Encerrado ██\n\n");
+		exit(0);
 }
