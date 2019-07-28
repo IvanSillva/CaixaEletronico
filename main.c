@@ -2,9 +2,9 @@
 
 
 int main()
-{
-	extrato("LOGIN:Jorge", "SENHA:902111");
-	//loginn();
+{ 
+	//deposito("LOGIN:Vicky", "SENHA:408156");
+	loginn();
 	//menu();
 	//randomNumber();
 	//printf("%d\n", randomNumber());
