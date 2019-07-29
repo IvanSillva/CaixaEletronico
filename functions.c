@@ -147,6 +147,7 @@ while(flag==0){
 	printf("\t       █ 3 - Pagamento    █\n");
 	printf("\t       █ 4 - Saque        █\n");
 	printf("\t       █ 5 - Transferencia█\n");
+	printf("\t       █ 6 - Deslogar     █\n");
 	printf("\t       █ 0 - Sair         █\n");
 	printf("\t       ██                ██\n\n");
 
@@ -155,7 +156,7 @@ while(flag==0){
     scanf("%d", &opc);
 	getchar();
 
-	while(opc<0 || opc>5)
+	while(opc<0 || opc>6)
 	{	
 		printf ("\n██ Número do comando inválido!\n");
 		printf("\n██ Informe o número da opção: ");
@@ -183,6 +184,10 @@ while(flag==0){
 
 		case 5:
 		transferencia(login, password);
+		break;
+
+		case 6:
+		loginn();
 		break;
 
 		case 0:
