@@ -136,7 +136,8 @@ int randomNumber() {
 }
 
 void menu(char *login, char *password)
-{
+{	
+	double money;
 	int flag = 0;
 while(flag==0){
 	cbc();
@@ -145,6 +146,7 @@ while(flag==0){
 	printf("\t       █ 2 - Depósito     █\n");
 	printf("\t       █ 3 - Pagamento    █\n");
 	printf("\t       █ 4 - Saque        █\n");
+	printf("\t       █ 5 - Transferencia█\n");
 	printf("\t       █ 0 - Sair         █\n");
 	printf("\t       ██                ██\n\n");
 
@@ -153,7 +155,7 @@ while(flag==0){
     scanf("%d", &opc);
 	getchar();
 
-	while(opc<0 || opc>4)
+	while(opc<0 || opc>5)
 	{	
 		printf ("\n██ Número do comando inválido!\n");
 		printf("\n██ Informe o número da opção: ");
@@ -164,7 +166,7 @@ while(flag==0){
 	{
 
 		case 1:
-		extrato(login, password);
+		extrato(login, password, &money);
 		break;
 
 		case 2:
@@ -179,6 +181,10 @@ while(flag==0){
 		saque(login, password);
 		break;
 
+		case 5:
+		transferencia(login, password);
+		break;
+
 		case 0:
 		flag=1;
 		sair();
@@ -187,7 +193,7 @@ while(flag==0){
 }
 }
 
-void extrato(char *login, char *password)
+void extrato(char *login, char *password, double *money)
 {	
 	char lgn[100], shn[100], sald[100], saldo[100], leitor[1000];
 	double dep = 50, x = 100, aux = 1;
@@ -210,6 +216,7 @@ void extrato(char *login, char *password)
 				printf("\t       ██     Extrato     ██\n\n");
 				printf("\t     ██ %s\n", login);
 				printf("\t     ██ SALDO: %s\n", sald);
+				*money=atof(sald);
 				break;
 				}
 	}
@@ -427,6 +434,94 @@ void saque(char *login, char *password)
 	fclose(temp);
 	rtr();
 }
+
+void transferencia(char *login, char *password)
+{
+	char trans[500],lgn[100], shn[100], sald[100], saldo[100], leitor[1000];
+	double pag = 50, x = 100, aux = 1, flag = 0, money;
+	cbc();
+	printf("\t       ██    Transferencia    ██\n\n");
+
+	printf("\t     ██ Conta: ");
+		scanf("%s", trans);
+		char conta[50];
+		strcpy(conta, "LOGIN:");
+		strcat(conta, trans);
+	ext(login, password, &money);
+	printf("\t     ██ Valor: ");
+	scanf("%lf", &pag);
+	getchar();
+
+	while(pag>money){
+		printf("\n\t       ██ Saldo Insuficiente.\n");
+		printf("\t       ██ Saldo Atual: %.2lf.\n", x);
+		printf("\t       ██ Digite novamente\n\n");
+		printf("\t     ██ Valor: ");
+		scanf("%lf", &pag);
+	}
+	
+	FILE *Accounts = fopen("accounts","r");
+	FILE *temp = fopen("temp","w");
+	
+	while(aux>0)
+	{		
+			if(fgets(leitor, 1000, Accounts) == NULL)
+			{	
+				break;
+			}
+
+			fscanf(Accounts,"%s\n", lgn);
+			fscanf(Accounts,"%s\n", shn);
+			fscanf(Accounts,"%s\n", sald);
+
+			if(strcmp(login, lgn) == 0 && strcmp(password, shn) == 0){
+				fprintf(temp,"===========\n");
+				fprintf(temp, "%s\n",lgn);
+				fprintf(temp, "%s\n",shn);
+					x = atof(sald);
+					x = x-pag;
+				fprintf(temp, "%.2lf\n", x);
+				printf("\n\n\t     ██ SALDO ATUAL: %.2lf\n", x);
+					}else if(strcmp(conta, lgn) == 0 ){
+						fprintf(temp,"===========\n");
+						fprintf(temp, "%s\n",lgn);
+						fprintf(temp, "%s\n",shn);
+							x = atof(sald);
+							x = x+pag;
+						fprintf(temp, "%.2lf\n", x);
+							}else{
+								fprintf(temp,"===========\n");
+								fprintf(temp, "%s\n",lgn);
+								fprintf(temp, "%s\n",shn);
+								fprintf(temp, "%s\n",sald);
+			}
+	}
+	fclose(Accounts);
+	fclose(temp);
+
+	Accounts = fopen("accounts","w");
+	temp = fopen("temp","r");
+ 	while(aux>0)
+	{		
+			if(fgets(leitor, 1000, temp) == NULL)
+			{	
+				break;
+			}
+
+			fscanf(temp,"%s\n", lgn);
+			fscanf(temp,"%s\n", shn);
+			fscanf(temp,"%s\n", sald);			
+			fprintf(Accounts,"===========\n");
+			fprintf(Accounts, "%s\n",lgn);
+			fprintf(Accounts, "%s\n",shn);
+			fprintf(Accounts, "%s\n",sald);
+			}	
+	fclose(Accounts);
+	fclose(temp);
+	rtr();
+
+}
+
 void rtr(){
 	int opc;
 	printf("\n\t       ██   1 - Menu      ██\n");
@@ -438,10 +533,36 @@ void rtr(){
 	}
 
 }
+
 void sair()
 {
 		system("clear");
 		cbc();
 		printf("\t         ██ Programa Encerrado ██\n\n");
 		exit(0);
+}
+
+void ext(char *login, char *password, double *money)
+{	
+	char lgn[100], shn[100], sald[100], saldo[100], leitor[1000];
+	double aux = 1;
+	FILE *Accounts = fopen("accounts","r");
+
+	while(aux>0)
+	{		
+			if(fgets(leitor, 1000, Accounts) == NULL)
+			{	
+				break;
+			}
+
+			fscanf(Accounts,"%s\n", lgn);
+			fscanf(Accounts,"%s\n", shn);
+			fscanf(Accounts,"%s\n", sald);
+
+			if(strcmp(login, lgn) == 0 && strcmp(password, shn) == 0){
+				*money=atof(sald);
+				break;
+				}
+	}
+	fclose(Accounts);
 }
