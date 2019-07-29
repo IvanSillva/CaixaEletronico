@@ -20,6 +20,8 @@
 >  git clone https://projetos.imd.ufrn.br/lp120192/aula-de-git/caixa-eletronico-ivan_jorge_vitoria.git
 
 ##### *Para compilar e executar:*
->  gcc Init.c
+>  Entre na pasta do arquivo e digite:
 
->  ./a.out
+`gcc Init.c`
+
+`./a.out`
