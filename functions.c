@@ -452,7 +452,7 @@ void transferencia(char *login, char *password)
 		char conta[50];
 		strcpy(conta, "LOGIN:");
 		strcat(conta, trans);
-	ext(login, password, &money);
+	value(login, password, &money);
 	printf("\t     ██ Valor: ");
 	scanf("%lf", &pag);
 	getchar();
@@ -547,7 +547,7 @@ void sair()
 		exit(0);
 }
 
-void ext(char *login, char *password, double *money)
+void value(char *login, char *password, double *money)
 {	
 	char lgn[100], shn[100], sald[100], saldo[100], leitor[1000];
 	double aux = 1;

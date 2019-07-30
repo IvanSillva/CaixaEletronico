@@ -15,3 +15,4 @@ void saque(char *login, char *password);
 void transferencia(char *login, char *password);
 void sair();
 void rtr();
+void value(char *login, char *password, double *money);
