@@ -1,10 +1,12 @@
 #include "functions.h"
 
+using namespace std;
+
 void loginn(){
 	cbc();
 	int opc, op, flag = 0;
-	printf("\t\t  ██  BEM VINDO  ██\n\n");
-	printf("\t\t  ██ 1 - Login   ██\n");
+	cout<<"\t\t  ██  BEM VINDO  ██\n\n";
+	cout<<"\t\t  ██ 1 - Login   ██\n";
 	printf("\t\t  ██ 0 - Cadastro██\n");
 
 	printf("\n\t\t  Opção: ");
@@ -50,7 +52,7 @@ void loginn(){
 	{
 			if(fgets(leitor, 1000, Accounts) == NULL){
 				printf("\n ██ Conta não existente, tente novamente!!\n");
-				sleep(1);
+				//sleep(1);
 				flag = 0;
 				break;
 			}else
@@ -92,10 +94,10 @@ void resgistro(){
 	}
 	if(strcmp(shn, "YES")== 0 || strcmp(shn, "yes")== 0){
 		printf("Cadastrado!\n");
-		sleep(1);
+		//sleep(1);
 	}else{
 		printf("Cancelado!\n" );
-		sleep(1);
+		//sleep(1);
 		exit(0);
 	}
 	FILE *Accounts = fopen("accounts","a+");
