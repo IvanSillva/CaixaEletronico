@@ -25,6 +25,6 @@
 ##### *Para compilar e executar:*
 >  Entre na pasta do arquivo e digite:
 
-`gcc Init.c`
+`g++ Init.cpp`
 
 `./a.out`

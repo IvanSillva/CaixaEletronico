@@ -5,19 +5,19 @@ using namespace std;
 void loginn(){
 	cbc();
 	int opc, op, flag = 0;
-	cout<<"\t\t  ██  BEM VINDO  ██\n\n";
-	cout<<"\t\t  ██ 1 - Login   ██\n";
-	printf("\t\t  ██ 0 - Cadastro██\n");
+	cout<<"\t\t  ██  BEM VINDO   ██\n\n";
+	cout<<"\t\t  ██ 1 - Login    ██\n";
+	cout<<"\t\t  ██ 0 - Cadastro ██\n";
 
-	printf("\n\t\t  Opção: ");
+	cout<<"\n\t\t  Opção: ";
 
-	scanf("%d", &opc);
+	cin>>opc;
 	getchar();
 	while(opc!=1 && opc!=0)
 	{
-		printf("\n\t    ██ Opção Invalida. Digite novamente ██\n");
-		printf("\n\t\t\t   Opção: ");
-		scanf("%d", &opc);
+		cout<<"\n\t    ██ Opção Invalida. Digite novamente ██\n";
+		cout<<"\n\t\t\t   Opção: ";
+		cin>>opc;
 	}
 	if(opc == 1){
 	char login[50], lgn[100];
@@ -37,11 +37,11 @@ void loginn(){
 	strcat(password, "SENHA:");
 
 
-	printf("\t        ██    Acesso    ██\n\n");
-	printf("\t     ██ Login: ");
-	scanf("%s", loginU);
-	printf("\t     ██ Password: ");
-	scanf("%s", passwordU);
+	cout<<"\t        ██    Acesso    ██\n\n";
+	cout<<"\t        ██ Login: ";
+	cin>> loginU;
+	cout<<"\t        ██ Password: ";
+	cin>> passwordU;
 	flag = 1;
 	strcat(login, loginU);
 	strcat(password, passwordU);
@@ -51,7 +51,7 @@ void loginn(){
 	while(strcmp(login, lgn) != 0 || strcmp(password, shn) != 0)
 	{
 			if(fgets(leitor, 1000, Accounts) == NULL){
-				printf("\n ██ Conta não existente, tente novamente!!\n");
+				cout<<"\n ██ Conta não existente, tente novamente!!\n";
 				//sleep(1);
 				flag = 0;
 				break;
@@ -82,21 +82,21 @@ void resgistro(){
 	password = randomNumber();
 	cbc();
 
-	printf("\t       ██   Cadastro   ██\n\n");
-	printf("\t     ██ Login: ");
-	scanf("%s", login);
-	printf("\t     ██ Password: %d\n", password);
-	printf("\n\t     ██ Digite [YES] para continuar\n");
-	printf("\n\t     ██ Digite [NO] para cancelar\n");
-	scanf("%s", shn);
+	cout<<"\t       ██   Cadastro   ██\n\n";
+	cout<<"\t       ██ Login: ";
+	cin>>login;
+	cout<<"\t       ██ Password: "<< password<<endl;
+	cout<<"\n\t       ██ Digite [YES] para continuar\n";
+	cout<<"\n\t       ██ Digite [NO] para cancelar\n";
+	cin>>shn;
 	while(strcmp(shn, "YES")!= 0 && strcmp(shn, "NO")!= 0 && strcmp(shn, "yes")!= 0 && strcmp(shn, "no")!= 0){
-		scanf("%s", shn);
+		cin>>shn;
 	}
 	if(strcmp(shn, "YES")== 0 || strcmp(shn, "yes")== 0){
-		printf("Cadastrado!\n");
+		cout<<"Cadastrado!\n";
 		//sleep(1);
 	}else{
-		printf("Cancelado!\n" );
+		cout<<"Cancelado!\n";
 		//sleep(1);
 		exit(0);
 	}
@@ -110,19 +110,18 @@ void resgistro(){
 
     fclose(Accounts);
 
-
 }
 
 void cbc()
 {
 	system("clear");
-	printf("███████████████████████████████████████████████████\n");
-	printf("██████       ██       ██  ██  ███  ██       ███████\n");
-	printf("██████  ███████  ███  ██  ███  █  ███  ███  ███████\n");
-	printf("██████  ███████       ██  ████   ████       ███████\n");
-	printf("██████  ███████  ███  ██  ███  █  ███  ███  ███████\n");
-	printf("██████       ██  ███  ██  ██  ███  ██  ███  ███████\n");
-	printf("███████████████████████████████████████████████████\n\n");
+	cout<<"███████████████████████████████████████████████████\n";
+	cout<<"██████       ██       ██  ██  ███  ██       ███████\n";
+	cout<<"██████  ███████  ███  ██  ███  █  ███  ███  ███████\n";
+	cout<<"██████  ███████       ██  ████   ████       ███████\n";
+	cout<<"██████  ███████  ███  ██  ███  █  ███  ███  ███████\n";
+	cout<<"██████       ██  ███  ██  ██  ███  ██  ███  ███████\n";
+	cout<<"███████████████████████████████████████████████████\n\n";
 }
 
 int randomNumber() {
@@ -143,26 +142,26 @@ void menu(char *login, char *password)
 	int flag = 0;
 while(flag==0){
 	cbc();
-	printf("\t       ██     OPÇÕES     ██\n");
-	printf("\t       █ 1 - Extrato      █\n");
-	printf("\t       █ 2 - Depósito     █\n");
-	printf("\t       █ 3 - Pagamento    █\n");
-	printf("\t       █ 4 - Saque        █\n");
-	printf("\t       █ 5 - Transferencia█\n");
-	printf("\t       █ 6 - Deslogar     █\n");
-	printf("\t       █ 0 - Sair         █\n");
-	printf("\t       ██                ██\n\n");
+	cout<<"\t       ██     OPÇÕES     ██\n";
+	cout<<"\t       █ 1 - Extrato      █\n";
+	cout<<"\t       █ 2 - Depósito     █\n";
+	cout<<"\t       █ 3 - Pagamento    █\n";
+	cout<<"\t       █ 4 - Saque        █\n";
+	cout<<"\t       █ 5 - Transferencia█\n";
+	cout<<"\t       █ 6 - Deslogar     █\n";
+	cout<<"\t       █ 0 - Sair         █\n";
+	cout<<"\t       ██                ██\n\n";
 
 	int opc;
-	printf("\t       ██ Opção: ");
-    scanf("%d", &opc);
+	cout<<"\t       ██ Opção: ";
+    cin>>opc;
 	getchar();
 
 	while(opc<0 || opc>6)
 	{	
 		printf ("\n██ Número do comando inválido!\n");
-		printf("\n██ Informe o número da opção: ");
-		scanf("%d", &opc);
+		cout<<"\n  ██ Informe o número da opção: ";
+		cin>>opc;
 	}
 
 	switch(opc)
@@ -220,9 +219,9 @@ void extrato(char *login, char *password, double *money)
 
 			if(strcmp(login, lgn) == 0 && strcmp(password, shn) == 0){
 				cbc();
-				printf("\t       ██     Extrato     ██\n\n");
-				printf("\t     ██ %s\n", login);
-				printf("\t     ██ SALDO: %s\n", sald);
+				cout<<"\t       ██     Extrato     ██\n\n"<<endl;
+				cout<<"\t       ██ "<<login<<endl;
+				cout<<"\t       ██ SALDO: "<<sald<<endl;
 				*money=atof(sald);
 				break;
 				}
@@ -237,9 +236,9 @@ void deposito(char *login, char *password)
 	char lgn[100], shn[100], sald[100], saldo[100], leitor[1000];
 	double dep = 50, x = 100, aux = 1;
 	cbc();
-	printf("\t       ██     Deposito     ██\n\n");
-	printf("\t     ██ Valor: ");
-	scanf("%lf", &dep);
+	cout<<"\t       ██     Deposito     ██\n\n";
+	cout<<"\t       ██ Valor: ";
+	cin>>dep;
 
 	FILE *Accounts = fopen("accounts","r");
 	FILE *temp = fopen("temp","w");
@@ -261,9 +260,9 @@ void deposito(char *login, char *password)
 				x = atof(sald);
 				x = x+dep;
 				fprintf(temp, "%.2lf\n", x);
-				printf("\n\t       ██     Extrato      ██\n\n");
-				printf("\t     ██ %s\n", login);
-				printf("\t     ██ SALDO: %.2lf\n", x);
+				cout<<"\n\t       ██     Extrato      ██\n\n";
+				cout<<"\t         ██ "<< login<<endl;
+				cout<<"\t         ██ SALDO: "<<x<<endl;
 				}else{
 				fprintf(temp,"===========\n");
 				fprintf(temp, "%s\n",lgn);
@@ -301,11 +300,11 @@ void pagamento(char *login, char *password)
 	char barra[300], lgn[100], shn[100], sald[100], saldo[100], leitor[1000];
 	double pag = 50, x = 100, aux = 1;
 	cbc();
-	printf("\t       ██     Pagamento     ██\n\n");
-	printf("\t     ██ Codigo de barra: ");
-	scanf("%s", barra);
-	printf("\t     ██ Valor: ");
-	scanf("%lf", &pag);
+	cout<<"\t       ██     Pagamento     ██\n\n";
+	cout<<"\t       ██ Codigo de barra: ";
+	cin>> barra;
+	cout<<"\t       ██ Valor: ";
+	cin>>pag;
 
 
 	
@@ -329,15 +328,15 @@ void pagamento(char *login, char *password)
 				fprintf(temp, "%s\n",shn);
 				x = atof(sald);
 				while(x<pag){
-					printf("\n\t       ██ Saldo Insuficiente.\n");
-					printf("\t       ██ Saldo Atual: %.2lf.\n", x);
-					printf("\t       ██ Digite novamente\n\n");
-					printf("\t     ██ Valor: ");
-					scanf("%lf", &pag);
+					cout<<"\n\t       ██ Saldo Insuficiente.\n";
+					cout<<"\t       ██ Saldo Atual: "<< x<<endl;
+					cout<<"\t       ██ Digite novamente\n"<<endl;
+					cout<<"\t     ██ Valor: ";
+					cin>>pag;
 				}
 				x = x-pag;
 				fprintf(temp, "%.2lf\n", x);
-				printf("\n\n\t     ██ SALDO ATUAL: %.2lf\n", x);
+				cout<<"\n\n\t       ██ SALDO ATUAL: "<< x<<endl;
 				}else{
 				fprintf(temp,"===========\n");
 				fprintf(temp, "%s\n",lgn);
@@ -375,9 +374,9 @@ void saque(char *login, char *password)
 	char lgn[100], shn[100], sald[100], saldo[100], leitor[1000];
 	double pag = 50, x = 100, aux = 1;
 	cbc();
-	printf("\t       ██       Saque       ██\n\n");
-	printf("\t     ██ Valor: ");
-	scanf("%lf", &pag);
+	cout<<"\t       ██       Saque       ██\n\n";
+	cout<<"\t       ██ Valor: ";
+	cin>>pag;
 
 
 	
@@ -401,15 +400,15 @@ void saque(char *login, char *password)
 				fprintf(temp, "%s\n",shn);
 				x = atof(sald);
 				while(x<pag){
-					printf("\n\t       ██ Saldo Insuficiente.\n");
-					printf("\t       ██ Saldo Atual: %.2lf.\n", x);
-					printf("\t       ██ Digite novamente\n\n");
-					printf("\t     ██ Valor: ");
-					scanf("%lf", &pag);
+					cout<<"\n\t       ██ Saldo Insuficiente.\n";
+					cout<<"\t       ██ Saldo Atual: "<< x<<endl;
+					cout<<"\t       ██ Digite novamente\n"<<endl;
+					cout<<"\t     ██ Valor: ";
+					cin>>pag;
 				}
 				x = x-pag;
 				fprintf(temp, "%.2lf\n", x);
-				printf("\n\n\t     ██ SALDO ATUAL: %.2lf\n", x);
+				cout<<"\n\n\t       ██ SALDO ATUAL: "<< x<<endl;
 				}else{
 				fprintf(temp,"===========\n");
 				fprintf(temp, "%s\n",lgn);
@@ -447,24 +446,24 @@ void transferencia(char *login, char *password)
 	char trans[500],lgn[100], shn[100], sald[100], saldo[100], leitor[1000];
 	double pag = 50, x = 100, aux = 1, flag = 0, money;
 	cbc();
-	printf("\t       ██    Transferencia    ██\n\n");
+	cout<<"\t       ██    Transferencia    ██\n\n";
 
-	printf("\t     ██ Conta: ");
-		scanf("%s", trans);
+	cout<<"\t       ██ Conta: ";
+		cin>>trans;
 		char conta[50];
 		strcpy(conta, "LOGIN:");
 		strcat(conta, trans);
 	value(login, password, &money);
-	printf("\t     ██ Valor: ");
-	scanf("%lf", &pag);
+	cout<<"\t       ██ Valor: ";
+	cin>>pag;
 	getchar();
 
 	while(pag>money){
-		printf("\n\t       ██ Saldo Insuficiente.\n");
-		printf("\t       ██ Saldo Atual: %.2lf.\n", x);
-		printf("\t       ██ Digite novamente\n\n");
-		printf("\t     ██ Valor: ");
-		scanf("%lf", &pag);
+		cout<<"\n\t       ██ Saldo Insuficiente.\n";
+		cout<<"\t         ██ Saldo Atual: "<< x<<endl;
+		cout<<"\t         ██ Digite novamente\n\n";
+		cout<<"\t         ██ Valor: ";
+		cin>>pag;
 	}
 	
 	FILE *Accounts = fopen("accounts","r");
@@ -488,7 +487,7 @@ void transferencia(char *login, char *password)
 					x = atof(sald);
 					x = x-pag;
 				fprintf(temp, "%.2lf\n", x);
-				printf("\n\n\t     ██ SALDO ATUAL: %.2lf\n", x);
+				cout<<"\n\n\t       ██ SALDO ATUAL: "<< x<<endl;
 					}else if(strcmp(conta, lgn) == 0 ){
 						fprintf(temp,"===========\n");
 						fprintf(temp, "%s\n",lgn);
@@ -531,10 +530,10 @@ void transferencia(char *login, char *password)
 
 void rtr(){
 	int opc;
-	printf("\n\t       ██   1 - Menu      ██\n");
-	printf("\t       ██   0 - Encerrar  ██\n");
-	printf("\t       ██  Opção: ");
-	scanf("%d", &opc);
+	cout<<"\n\t       ██   1 - Menu      ██\n";
+	cout<<"\t       ██   0 - Encerrar  ██\n";
+	cout<<"\t       ██   Opção: ";
+	cin>>opc;
 	if(opc == 0){
 		sair();
 	}
@@ -545,7 +544,7 @@ void sair()
 {
 		system("clear");
 		cbc();
-		printf("\t         ██ Programa Encerrado ██\n\n");
+		cout<<"\t         ██ Programa Encerrado ██\n\n";
 		exit(0);
 }
 
