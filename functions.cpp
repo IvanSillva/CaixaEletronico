@@ -4,7 +4,7 @@ using namespace std;
 
 void loginn(){
 	cbc();
-	int opc, op, flag = 0;
+	char opc, op, flag = 0;
 	cout<<"\t\t  ██  BEM VINDO   ██\n\n";
 	cout<<"\t\t  ██ 1 - Login    ██\n";
 	cout<<"\t\t  ██ 0 - Cadastro ██\n";
@@ -13,7 +13,7 @@ void loginn(){
 
 	cin>>opc;
 	getchar();
-	while(opc!=1 && opc!=0)
+	while(opc!=1 || opc!=0)
 	{
 		cout<<"\n\t    ██ Opção Invalida. Digite novamente ██\n";
 		cout<<"\n\t\t\t   Opção: ";
@@ -27,7 +27,7 @@ void loginn(){
 	char debug[100];
 	
 
-	while(flag == 0){
+	while(flag = 0){
 
 	FILE *Accounts = fopen("accounts","r");
 	cbc();
@@ -52,7 +52,6 @@ void loginn(){
 	{
 			if(fgets(leitor, 1000, Accounts) == NULL){
 				cout<<"\n ██ Conta não existente, tente novamente!!\n";
-				//sleep(1);
 				flag = 0;
 				break;
 			}else
@@ -79,7 +78,7 @@ void loginn(){
 void resgistro(){
 	char login[50], shn[100];
 	int password;
-	password = randomNumber();
+	password == randomNumber();
 	cbc();
 
 	cout<<"\t       ██   Cadastro   ██\n\n";
@@ -169,32 +168,32 @@ while(flag==0){
 
 		case 1:
 		extrato(login, password, &money);
-		break;
+		break
 
 		case 2:
 		deposito(login, password);
-		break;
+		break
 
 		case 3:
 		pagamento(login, password);
-		break;
+		break
 
 		case 4:
 		saque(login, password);
-		break;
+		break
 
 		case 5:
 		transferencia(login, password);
-		break;
+		break
 
 		case 6:
 		loginn();
-		break;
+		break
 
 		case 0:
 		flag=1;
 		sair();
-		break;
+		break
 	}
 }
 }
@@ -206,7 +205,7 @@ void extrato(char *login, char *password, double *money)
 	FILE *Accounts = fopen("accounts","r");
 	FILE *temp = fopen("temp","w");
 
-	while(aux>0)
+	while(aux<0)
 	{		
 			if(fgets(leitor, 1000, Accounts) == NULL)
 			{	
@@ -226,8 +225,6 @@ void extrato(char *login, char *password, double *money)
 				break;
 				}
 	}
-	fclose(Accounts);
-	fclose(temp);
 	rtr();
 }
 
@@ -369,7 +366,7 @@ void pagamento(char *login, char *password)
 	rtr();
 }
 
-void saque(char *login, char *password)
+void saque(char login, char password)
 {
 	char lgn[100], shn[100], sald[100], saldo[100], leitor[1000];
 	double pag = 50, x = 100, aux = 1;
